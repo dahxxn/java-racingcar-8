@@ -9,8 +9,14 @@ public class InputView {
         return readRawData(GameGuide.INPUT_CAR_NAMES.getMessage());
     }
 
+    public String readRoundData() {
+        return readRawData(GameGuide.INPUT_ROUND.getMessage());
+    }
+
     private String readRawData(String inputMessage) {
         System.out.println(inputMessage);
         return Console.readLine();
     }
+
+
 }

@@ -51,6 +51,24 @@ public class InputViewTest {
         );
     }
 
+    @Test
+    @DisplayName("시도할 횟수 입력받기 테스트")
+    void 시도할_횟수_입력받기() {
+        //given
+        String input = "5\n";
+        mockReadLine(input);
+        ByteArrayOutputStream output = mockOutput();
+
+        //when
+        String roundData = inputView.readRoundData();
+
+        //then
+        assertAll(
+                () -> assertThat(roundData).isEqualTo("5"),
+                () -> assertThat(output.toString()).contains(GameGuide.INPUT_ROUND.getMessage())
+        );
+    }
+
     private void mockReadLine(String input) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
     }
