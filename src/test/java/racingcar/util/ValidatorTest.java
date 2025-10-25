@@ -4,6 +4,8 @@ package racingcar.util;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,4 +64,40 @@ public class ValidatorTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_COUNT_ERROR.getMessage());
     }
+
+    @Test
+    @DisplayName("자동차 이름 검증")
+    void 자동차_이름_검증_정상() {
+        // given
+        String carName = "pobi";
+
+        // when & then
+        assertThatCode(() -> Validator.validateCarName(carName))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("자동차 이름 검증: 공백이면 예외가 발생한다")
+    void 자동차_이름_검증_공백_예외() {
+        // given
+        String carName = "";
+
+        // when & then
+        assertThatThrownBy(() -> Validator.validateCarName(carName))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CAR_NAME_ERROR_EMPTY.getMessage());
+    }
+
+    @Test
+    @DisplayName("자동차 이름 검증: 이름이 5자를 초과하면 예외가 발생한다")
+    void 자동차_이름_검증_길이초과_예외() {
+        // given
+        String carName = "verylongname";
+
+        // when & then
+        assertThatThrownBy(() -> Validator.validateCarName(carName))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CAR_NAME_ERROR_LONG.getMessage());
+    }
+
 }
