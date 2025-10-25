@@ -4,6 +4,7 @@ import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
+import static racingcar.error.ErrorMessage.ROUND_COUNT_ERROR;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import racingcar.model.Car;
 public final class Validator {
     private static final int MIN_CAR_COUNT = 2;
     private static final int MAX_CAR_NAME_LENGTH = 5;
+    private static final int MIN_ROUND_COUNT = 1;
 
     public static void validateCarCount(List<Car> cars) {
         if (cars == null || cars.size() < MIN_CAR_COUNT) {
@@ -36,6 +38,12 @@ public final class Validator {
             if (!carNames.add(car.getName())) {
                 throw new IllegalArgumentException(CAR_NAME_ERROR_DUPLICATE.getMessage());
             }
+        }
+    }
+
+    public static void validateRoundCount(int roundCount) {
+        if (roundCount < MIN_ROUND_COUNT) {
+            throw new IllegalArgumentException(ROUND_COUNT_ERROR.getMessage());
         }
     }
 

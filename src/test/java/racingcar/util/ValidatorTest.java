@@ -7,6 +7,7 @@ import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
+import static racingcar.error.ErrorMessage.ROUND_COUNT_ERROR;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,5 +146,39 @@ public class ValidatorTest {
         assertThatCode(() -> Validator.validateCarNameDuplicate(cars))
                 .doesNotThrowAnyException();
     }
-    
+
+    @Test
+    @DisplayName("시도 횟수 검증")
+    void 시도횟수_검증_정상() {
+        // given
+        int roundCount = 5;
+
+        // when & then
+        assertThatCode(() -> Validator.validateRoundCount(roundCount))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("시도 횟수 검증: 0이면 예외가 발생한다")
+    void 시도횟수_검증_예외_0회() {
+        // given
+        int roundCount = 0;
+
+        // when & then
+        assertThatThrownBy(() -> Validator.validateRoundCount(roundCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ROUND_COUNT_ERROR.getMessage());
+    }
+
+    @Test
+    @DisplayName("시도 횟수 검증: 음수면 예외가 발생한다")
+    void 시도횟수_검증_예외_음수() {
+        // given
+        int roundCount = -3;
+
+        // when & then
+        assertThatThrownBy(() -> Validator.validateRoundCount(roundCount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ROUND_COUNT_ERROR.getMessage());
+    }
 }
