@@ -2,7 +2,7 @@ package racingcar.error;
 
 public enum ErrorMessage {
     ROUND_FORMAT_ERROR_NOT_NUMBER("[ERROR] 시도 횟수는 숫자여야 합니다."),
-
+    CAR_COUNT_ERROR("[ERROR] 경주 게임에 참여하는 자동차 수는 2 이상이어야 합니다."),
     ;
 
     private String message;

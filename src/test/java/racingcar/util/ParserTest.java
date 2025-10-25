@@ -1,7 +1,7 @@
 package racingcar.util;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.error.ErrorMessage.ROUND_FORMAT_ERROR_NOT_NUMBER;
 
 import java.util.List;
