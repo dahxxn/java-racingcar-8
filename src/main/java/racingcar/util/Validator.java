@@ -1,10 +1,13 @@
 package racingcar.util;
 
 import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import racingcar.model.Car;
 
 public final class Validator {
@@ -24,6 +27,15 @@ public final class Validator {
 
         if (carName.length() > MAX_CAR_NAME_LENGTH) {
             throw new IllegalArgumentException(CAR_NAME_ERROR_LONG.getMessage());
+        }
+    }
+
+    public static void validateCarNameDuplicate(List<Car> cars) {
+        Set<String> carNames = new HashSet<>();
+        for (Car car : cars) {
+            if (!carNames.add(car.getName())) {
+                throw new IllegalArgumentException(CAR_NAME_ERROR_DUPLICATE.getMessage());
+            }
         }
     }
 

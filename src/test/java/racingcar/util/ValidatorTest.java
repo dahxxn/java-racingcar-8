@@ -4,6 +4,7 @@ package racingcar.util;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
 
@@ -100,4 +101,49 @@ public class ValidatorTest {
                 .hasMessage(CAR_NAME_ERROR_LONG.getMessage());
     }
 
+    @Test
+    @DisplayName("자동차 이름 중복 검증")
+    void 자동차_이름_중복_검증_정상() {
+        // given
+        List<Car> cars = List.of(
+                new Car("pobi"),
+                new Car("woni"),
+                new Car("jun")
+        );
+
+        // when & then
+        assertThatCode(() -> Validator.validateCarNameDuplicate(cars))
+                .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("자동차 이름 중복 검증: 중복된 이름이 존재하면 예외가 발생한다")
+    void 자동차_이름_중복_검증_예외() {
+        // given
+        List<Car> cars = List.of(
+                new Car("pobi"),
+                new Car("woni"),
+                new Car("pobi") // 중복
+        );
+
+        // when & then
+        assertThatThrownBy(() -> Validator.validateCarNameDuplicate(cars))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CAR_NAME_ERROR_DUPLICATE.getMessage());
+    }
+
+    @Test
+    @DisplayName("자동차 이름 중복 검증: 대소문자가 다르면 중복으로 보지 않는다")
+    void 자동차_이름_중복_검증_대소문자_구분() {
+        // given
+        List<Car> cars = List.of(
+                new Car("pobi"),
+                new Car("Pobi")
+        );
+
+        // when & then
+        assertThatCode(() -> Validator.validateCarNameDuplicate(cars))
+                .doesNotThrowAnyException();
+    }
+    
 }
