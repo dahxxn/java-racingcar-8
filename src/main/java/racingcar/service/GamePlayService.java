@@ -19,9 +19,7 @@ public class GamePlayService {
 
     public RaceData play(SetupData setupData) {
         String roundSnapshot = playAllRounds(setupData);
-
         String finalWinners = Winners.pickWinners(setupData.cars());
-
         return new RaceData(roundSnapshot, finalWinners);
     }
 
@@ -31,7 +29,6 @@ public class GamePlayService {
         for (int round = 0; round < setupData.rounds(); round++) {
             playOneRound(setupData.cars(), roundSnapshot);
         }
-
         return roundSnapshot.toString();
     }
 

@@ -24,7 +24,8 @@ public class Car {
     }
 
     public String getDistanceDisplay() {
-        return DISTANCE_MARK.getMessage().repeat(distance);
+        String distanceMark = DISTANCE_MARK.getMessage();
+        return distanceMark.repeat(distance);
     }
 
     public int getDistance() {

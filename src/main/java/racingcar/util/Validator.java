@@ -35,7 +35,8 @@ public final class Validator {
     public static void validateNoDuplicateCarNames(List<Car> cars) {
         Set<String> carNames = new HashSet<>();
         for (Car car : cars) {
-            if (!carNames.add(car.getName())) {
+            String currentCarName = car.getName();
+            if (!carNames.add(currentCarName)) {
                 throw new IllegalArgumentException(CAR_NAME_ERROR_DUPLICATE.getMessage());
             }
         }

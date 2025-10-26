@@ -15,21 +15,31 @@ public class GameSetupService {
     }
 
     private SetupData parseInputData(InputData inputData) {
-        List<Car> cars = Parser.getCarList(inputData.carsData());
-        int rounds = Parser.getRoundNumber(inputData.roundData());
+        String carsData = inputData.carsData();
+        List<Car> cars = Parser.getCarList(carsData);
+
+        String roundData = inputData.roundData();
+        int rounds = Parser.getRoundNumber(roundData);
+
         return new SetupData(cars, rounds);
     }
 
     private void validateSetupData(SetupData setupData) {
-        validateCars(setupData.cars());
-        Validator.validateRoundCount(setupData.rounds());
+        List<Car> cars = setupData.cars();
+        validateCars(cars);
+
+        int rounds = setupData.rounds();
+        Validator.validateRoundCount(rounds);
     }
 
     private void validateCars(List<Car> cars) {
         Validator.validateCarCount(cars);
+
         for (Car car : cars) {
-            Validator.validateCarName(car.getName());
+            String carName = car.getName();
+            Validator.validateCarName(carName);
         }
+
         Validator.validateNoDuplicateCarNames(cars);
     }
 }
