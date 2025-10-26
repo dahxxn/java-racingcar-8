@@ -56,7 +56,7 @@ class GameSetupServiceTest {
         //when & then
         assertThatThrownBy(() -> gameSetupService.prepare(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(CAR_NAME_ERROR_EMPTY.getMessage());
+                .hasMessage(CAR_COUNT_ERROR.getMessage());
     }
 
     @Test
