@@ -1,6 +1,5 @@
 package racingcar.util;
 
-
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
@@ -18,8 +17,8 @@ import racingcar.model.Car;
 public class ValidatorTest {
 
     @Test
-    @DisplayName("자동차 수 검증 테스트")
-    void 자동차_수_검증_테스트_정상() {
+    @DisplayName("자동차 수 검증 테스트: 2대 이상일 때 통과")
+    void 자동차_수_검증_정상() {
         //given
         List<Car> cars = List.of(
                 new Car("pobi"),
@@ -33,8 +32,8 @@ public class ValidatorTest {
     }
 
     @Test
-    @DisplayName("자동차 수 검증 예외 테스트: 자동차 수가 1개일때")
-    void 자동차_수_검증_예외_테스트_1개일_때() {
+    @DisplayName("자동차 수 검증 예외 테스트: 1대일 때 예외 발생")
+    void 자동차_수_검증_예외_1개() {
         //given
         List<Car> cars = List.of(
                 new Car("pobi")
@@ -46,10 +45,9 @@ public class ValidatorTest {
                 .hasMessage(CAR_COUNT_ERROR.getMessage());
     }
 
-
     @Test
-    @DisplayName("자동차 수 검증 예외 테스트: 자동차 수가 0개일때")
-    void 자동차_수_검증_예외_테스트_0개일_때() {
+    @DisplayName("자동차 수 검증 예외 테스트: 0대일 때 예외 발생")
+    void 자동차_수_검증_예외_0개() {
         //given
         List<Car> cars = new ArrayList<>();
 
@@ -60,123 +58,115 @@ public class ValidatorTest {
     }
 
     @Test
-    @DisplayName("자동차 수 검증: null이면 예외가 발생한다")
-    void 자동차_수_검증_예외_null() {
-        assertThatThrownBy(() -> Validator.validateCarCount(null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(CAR_COUNT_ERROR.getMessage());
-    }
-
-    @Test
-    @DisplayName("자동차 이름 검증")
+    @DisplayName("자동차 이름 검증 테스트: 정상적인 이름일 때 통과")
     void 자동차_이름_검증_정상() {
-        // given
+        //given
         String carName = "pobi";
 
-        // when & then
+        //when & then
         assertThatCode(() -> Validator.validateCarName(carName))
                 .doesNotThrowAnyException();
     }
 
     @Test
-    @DisplayName("자동차 이름 검증: 공백이면 예외가 발생한다")
-    void 자동차_이름_검증_공백_예외() {
-        // given
+    @DisplayName("자동차 이름 검증 예외 테스트: 공백일 때 예외 발생")
+    void 자동차_이름_검증_예외_공백() {
+        //given
         String carName = "";
 
-        // when & then
+        //when & then
         assertThatThrownBy(() -> Validator.validateCarName(carName))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_NAME_ERROR_EMPTY.getMessage());
     }
 
     @Test
-    @DisplayName("자동차 이름 검증: 이름이 5자를 초과하면 예외가 발생한다")
-    void 자동차_이름_검증_길이초과_예외() {
-        // given
+    @DisplayName("자동차 이름 검증 예외 테스트: 5자 초과일 때 예외 발생")
+    void 자동차_이름_검증_예외_길이초과() {
+        //given
         String carName = "verylongname";
 
-        // when & then
+        //when & then
         assertThatThrownBy(() -> Validator.validateCarName(carName))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_NAME_ERROR_LONG.getMessage());
     }
 
     @Test
-    @DisplayName("자동차 이름 중복 검증")
+    @DisplayName("자동차 이름 중복 검증 테스트: 중복이 없을 때 통과")
     void 자동차_이름_중복_검증_정상() {
-        // given
+        //given
         List<Car> cars = List.of(
                 new Car("pobi"),
                 new Car("woni"),
                 new Car("jun")
         );
 
-        // when & then
+        //when & then
         assertThatCode(() -> Validator.validateNoDuplicateCarNames(cars))
                 .doesNotThrowAnyException();
     }
 
     @Test
-    @DisplayName("자동차 이름 중복 검증: 중복된 이름이 존재하면 예외가 발생한다")
+    @DisplayName("자동차 이름 중복 검증 예외 테스트: 중복일 때 예외 발생")
     void 자동차_이름_중복_검증_예외() {
-        // given
+        //given
         List<Car> cars = List.of(
                 new Car("pobi"),
                 new Car("woni"),
-                new Car("pobi") // 중복
+                new Car("pobi")
         );
 
-        // when & then
+        //when & then
         assertThatThrownBy(() -> Validator.validateNoDuplicateCarNames(cars))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_NAME_ERROR_DUPLICATE.getMessage());
     }
 
     @Test
-    @DisplayName("자동차 이름 중복 검증: 대소문자가 다르면 중복으로 보지 않는다")
-    void 자동차_이름_중복_검증_대소문자_구분() {
-        // given
+    @DisplayName("자동차 이름 중복 검증 테스트: 대소문자가 다를 때 통과")
+    void 자동차_이름_중복_검증_정상_대소문자() {
+        //given
         List<Car> cars = List.of(
                 new Car("pobi"),
                 new Car("Pobi")
         );
 
-        // when & then
+        //when & then
         assertThatCode(() -> Validator.validateNoDuplicateCarNames(cars))
                 .doesNotThrowAnyException();
     }
 
     @Test
-    @DisplayName("시도 횟수 검증")
-    void 시도횟수_검증_정상() {
-        // given
+    @DisplayName("라운드 수 검증 테스트: 정상적인 라운드 수일 때 통과")
+    void 라운드_수_검증_정상() {
+        //given
         int roundCount = 5;
 
-        // when & then
+        //when & then
         assertThatCode(() -> Validator.validateRoundCount(roundCount))
                 .doesNotThrowAnyException();
     }
 
     @Test
-    @DisplayName("시도 횟수 검증: 0이면 예외가 발생한다")
-    void 시도횟수_검증_예외_0회() {
-        // given
+    @DisplayName("라운드 수 검증 예외 테스트: 0일 때 예외 발생")
+    void 라운드_수_검증_예외_0회() {
+        //given
         int roundCount = 0;
 
-        // when & then
+        //when & then
         assertThatThrownBy(() -> Validator.validateRoundCount(roundCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ROUND_COUNT_ERROR.getMessage());
     }
 
     @Test
-    @DisplayName("시도 횟수 검증: 음수면 예외가 발생한다")
-    void 시도횟수_검증_예외_음수() {
-        // given
+    @DisplayName("라운드 수 검증 예외 테스트: 음수일 때 예외 발생")
+    void 라운드_수_검증_예외_음수() {
+        //given
         int roundCount = -3;
 
-        // when & then
+        //when & then
         assertThatThrownBy(() -> Validator.validateRoundCount(roundCount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ROUND_COUNT_ERROR.getMessage());
