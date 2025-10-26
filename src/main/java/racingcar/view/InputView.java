@@ -2,14 +2,21 @@ package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import racingcar.constant.GameGuide;
+import racingcar.record.InputData;
 
 public class InputView {
 
-    public String readCarsData() {
+    public InputData readInputData() {
+        String carsData = readCarsData();
+        String roundData = readRoundData();
+        return new InputData(carsData, roundData);
+    }
+
+    private String readCarsData() {
         return readRawData(GameGuide.INPUT_CAR_NAMES.getMessage());
     }
 
-    public String readRoundData() {
+    private String readRoundData() {
         return readRawData(GameGuide.INPUT_ROUND.getMessage());
     }
 

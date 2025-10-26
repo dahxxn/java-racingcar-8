@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.constant.GameGuide;
+import racingcar.record.InputData;
 
 public class InputViewTest {
     private InputView inputView;
@@ -34,37 +35,21 @@ public class InputViewTest {
     }
 
     @Test
-    @DisplayName("자동차 이름 목록 입력받기 테스트")
-    void 자동차_이름_목록_입력받기() {
+    @DisplayName("입력 데이터 읽기 테스트")
+    void 입력_데이터_읽기_테스트() {
         //given
-        String input = "pobi,woni,jun\n";
+        String input = "pobi,woni,jun\n5\n";
         mockReadLine(input);
         ByteArrayOutputStream output = mockOutput();
 
         //when
-        String carsData = inputView.readCarsData();
+        InputData inputData = inputView.readInputData();
 
         //then
         assertAll(
-                () -> assertThat(carsData).isEqualTo("pobi,woni,jun"),
-                () -> assertThat(output.toString()).contains(GameGuide.INPUT_CAR_NAMES.getMessage())
-        );
-    }
-
-    @Test
-    @DisplayName("시도할 횟수 입력받기 테스트")
-    void 시도할_횟수_입력받기() {
-        //given
-        String input = "5\n";
-        mockReadLine(input);
-        ByteArrayOutputStream output = mockOutput();
-
-        //when
-        String roundData = inputView.readRoundData();
-
-        //then
-        assertAll(
-                () -> assertThat(roundData).isEqualTo("5"),
+                () -> assertThat(inputData.carsData()).isEqualTo("pobi,woni,jun"),
+                () -> assertThat(inputData.roundData()).isEqualTo("5"),
+                () -> assertThat(output.toString()).contains(GameGuide.INPUT_CAR_NAMES.getMessage()),
                 () -> assertThat(output.toString()).contains(GameGuide.INPUT_ROUND.getMessage())
         );
     }
@@ -78,6 +63,4 @@ public class InputViewTest {
         System.setOut(new PrintStream(output));
         return output;
     }
-
-
 }
