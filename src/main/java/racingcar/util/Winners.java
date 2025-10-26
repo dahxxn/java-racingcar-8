@@ -3,6 +3,7 @@ package racingcar.util;
 import static racingcar.constant.GameGuide.DELIMITER_MARK;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import racingcar.model.Car;
 
 public class Winners {
@@ -10,24 +11,14 @@ public class Winners {
 
     public static String pickWinners(List<Car> cars) {
         int maxDistance = findMaxDistance(cars);
-        return getAllWinners(cars, maxDistance);
+        return collectWinnerNames(cars, maxDistance);
     }
 
-    private static String getAllWinners(List<Car> cars, int maxDistance) {
-        StringBuilder finalWinners = new StringBuilder();
-
-        for (Car car : cars) {
-            if (car.getDistance() == maxDistance) {
-                finalWinners.append(car.getName());
-                finalWinners.append(DELIMITER_MARK.getMessage());
-            }
-        }
-
-        if (!finalWinners.isEmpty()) {
-            finalWinners.deleteCharAt(finalWinners.length() - 1);
-        }
-
-        return finalWinners.toString();
+    private static String collectWinnerNames(List<Car> cars, int maxDistance) {
+        return cars.stream()
+                .filter(car -> car.getDistance() == maxDistance)
+                .map(Car::getName)
+                .collect(Collectors.joining(DELIMITER_MARK.getMessage()));
     }
 
     private static int findMaxDistance(List<Car> cars) {
