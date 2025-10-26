@@ -1,4 +1,4 @@
 package racingcar.record;
 
-public record RaceData(String roundSnapShot, String finalWinners) {
+public record RaceData(String roundSnapshot, String finalWinners) {
 }

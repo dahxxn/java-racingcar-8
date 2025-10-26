@@ -10,73 +10,86 @@ import racingcar.policy.ForwardPolicy;
 import racingcar.record.RaceData;
 import racingcar.record.SetupData;
 
-
 class GamePlayServiceTest {
 
-
     @Test
-    @DisplayName("공동 우승 테스트: 라운드 수만큼 누적 전진하여 공동 우승자가 된다")
-    void 공동_우승_테스트() {
+    @DisplayName("게임 진행 테스트: 모든 자동차가 동일하게 이동할 때 공동 우승")
+    void 게임_진행_공동_우승() {
         //given
         GamePlayService gamePlayService = new GamePlayService(new AlwaysMovePolicy());
         SetupData setupData = new SetupData(List.of(new Car("pobi"), new Car("woni")), 3);
 
         //when
-        RaceData result = gamePlayService.play(setupData);
+        RaceData raceData = gamePlayService.play(setupData);
 
         //then
-        assertThat(result.roundSnapShot())
+        assertThat(raceData.roundSnapshot())
                 .contains("pobi : -")
                 .contains("pobi : --")
                 .contains("pobi : ---")
                 .contains("woni : -")
                 .contains("woni : --")
                 .contains("woni : ---");
-
-        assertThat(result.finalWinners()).isEqualTo("pobi,woni");
+        assertThat(raceData.finalWinners()).isEqualTo("pobi, woni");
     }
 
-
     @Test
-    @DisplayName("번갈아 이동 정책: 첫 호출만 이동하게 함으로써 첫 번째 차만 우승자가 된다")
-    void 단일_우승_테스트() {
+    @DisplayName("게임 진행 테스트: 한 자동차만 이동할 때 단일 우승")
+    void 게임_진행_단일_우승() {
         //given
         GamePlayService gamePlayService = new GamePlayService(new SwitchingMovePolicy());
         SetupData setupData = new SetupData(List.of(new Car("pobi"), new Car("woni")), 3);
 
         //when
-        RaceData result = gamePlayService.play(setupData);
+        RaceData raceData = gamePlayService.play(setupData);
 
         //then
-        assertThat(result.roundSnapShot())
+        assertThat(raceData.roundSnapshot())
                 .contains("pobi : -")
                 .contains("pobi : --")
-                .contains("pobi : ---");
-        assertThat(result.roundSnapShot())
+                .contains("pobi : ---")
                 .doesNotContain("woni : -");
-        assertThat(result.finalWinners()).isEqualTo("pobi");
+        assertThat(raceData.finalWinners()).isEqualTo("pobi");
     }
 
-    static class AlwaysMovePolicy extends ForwardPolicy {
+    @Test
+    @DisplayName("게임 진행 테스트: 모든 자동차가 이동하지 않을 때")
+    void 게임_진행_모두_정지() {
+        //given
+        GamePlayService gamePlayService = new GamePlayService(new NeverMovePolicy());
+        SetupData setupData = new SetupData(List.of(new Car("pobi"), new Car("woni")), 3);
+
+        //when
+        RaceData raceData = gamePlayService.play(setupData);
+
+        //then
+        assertThat(raceData.roundSnapshot())
+                .contains("pobi : ")
+                .contains("woni : ")
+                .doesNotContain("-");
+        assertThat(raceData.finalWinners()).isEqualTo("pobi, woni");
+    }
+
+    private static class AlwaysMovePolicy extends ForwardPolicy {
         @Override
         public boolean canMove() {
             return true;
         }
     }
 
-    static class NeverMovePolicy extends ForwardPolicy {
+    private static class NeverMovePolicy extends ForwardPolicy {
         @Override
         public boolean canMove() {
             return false;
         }
     }
 
-    static class SwitchingMovePolicy extends ForwardPolicy {
-        private int call = 0;
+    private static class SwitchingMovePolicy extends ForwardPolicy {
+        private int callCount = 0;
 
         @Override
         public boolean canMove() {
-            return (call++ % 2) == 0;
+            return (callCount++ % 2) == 0;
         }
     }
 }

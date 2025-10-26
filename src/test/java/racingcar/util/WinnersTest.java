@@ -11,48 +11,76 @@ import racingcar.policy.ForwardPolicy;
 class WinnersTest {
 
     @Test
-    @DisplayName("공동 우승 테스트: 최대 거리 동일 시 공동 우승자를 쉼표로 연결해 반환한다")
-    void 공동_우승_테스트() {
+    @DisplayName("우승자 선정 테스트: 공동 우승일 때 쉼표로 연결하여 반환")
+    void 우승자_선정_공동_우승() {
         //given
-        Car a = carByMoves("pobi", 3);
-        Car b = carByMoves("woni", 1);
-        Car c = carByMoves("jun", 3);
+        Car pobi = carByMoves("pobi", 3);
+        Car woni = carByMoves("woni", 1);
+        Car jun = carByMoves("jun", 3);
 
         //when
-        String winners = Winners.pickWinners(List.of(a, b, c));
+        String winners = Winners.pickWinners(List.of(pobi, woni, jun));
 
         //then
-        assertThat(winners).isEqualTo("pobi,jun");
+        assertThat(winners).isEqualTo("pobi, jun");
     }
 
     @Test
-    @DisplayName("단일 우승 테스트: 단일 최대 거리의 자동차가 단일 우승자가 된다")
-    void 단일_우승_테스트() {
+    @DisplayName("우승자 선정 테스트: 단일 우승일 때 한 명만 반환")
+    void 우승자_선정_단일_우승() {
         //given
-        Car a = carByMoves("pobi", 2);
-        Car b = carByMoves("woni", 5);
+        Car pobi = carByMoves("pobi", 2);
+        Car woni = carByMoves("woni", 5);
 
         //when
-        String winners = Winners.pickWinners(List.of(a, b));
+        String winners = Winners.pickWinners(List.of(pobi, woni));
 
         //then
         assertThat(winners).isEqualTo("woni");
     }
 
+    @Test
+    @DisplayName("우승자 선정 테스트: 모든 자동차가 동일 거리일 때 전체 우승")
+    void 우승자_선정_전체_공동_우승() {
+        //given
+        Car pobi = carByMoves("pobi", 2);
+        Car woni = carByMoves("woni", 2);
+        Car jun = carByMoves("jun", 2);
 
-    static class AlwaysMovePolicy extends ForwardPolicy {
+        //when
+        String winners = Winners.pickWinners(List.of(pobi, woni, jun));
+
+        //then
+        assertThat(winners).isEqualTo("pobi, woni, jun");
+    }
+
+    @Test
+    @DisplayName("우승자 선정 테스트: 모든 자동차가 이동하지 않았을 때")
+    void 우승자_선정_거리_0() {
+        //given
+        Car pobi = new Car("pobi");
+        Car woni = new Car("woni");
+
+        //when
+        String winners = Winners.pickWinners(List.of(pobi, woni));
+
+        //then
+        assertThat(winners).isEqualTo("pobi, woni");
+    }
+
+    private Car carByMoves(String name, int moves) {
+        Car car = new Car(name);
+        AlwaysMovePolicy policy = new AlwaysMovePolicy();
+        for (int i = 0; i < moves; i++) {
+            car.tryMove(policy);
+        }
+        return car;
+    }
+
+    private static class AlwaysMovePolicy extends ForwardPolicy {
         @Override
         public boolean canMove() {
             return true;
         }
-    }
-
-    private Car carByMoves(String name, int moves) {
-        Car c = new Car(name);
-        var policy = new AlwaysMovePolicy();
-        for (int i = 0; i < moves; i++) {
-            c.tryMove(policy);
-        }
-        return c;
     }
 }

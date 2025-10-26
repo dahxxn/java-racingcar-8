@@ -1,6 +1,6 @@
 package racingcar.util;
 
-import static racingcar.constant.GameGuide.DELIMITER_MARK;
+import static racingcar.constant.GameGuide.OUTPUT_DELIMITER_MARK;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ public class Winners {
         return cars.stream()
                 .filter(car -> car.getDistance() == maxDistance)
                 .map(Car::getName)
-                .collect(Collectors.joining(DELIMITER_MARK.getMessage()));
+                .collect(Collectors.joining(OUTPUT_DELIMITER_MARK.getMessage()));
     }
 
     private static int findMaxDistance(List<Car> cars) {
