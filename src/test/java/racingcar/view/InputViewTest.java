@@ -35,26 +35,27 @@ public class InputViewTest {
     }
 
     @Test
-    @DisplayName("입력 데이터 읽기 테스트")
-    void 입력_데이터_읽기_테스트() {
+    @DisplayName("정상 입력 테스트: 자동차 이름과 라운드 수를 정상적으로 읽어옴")
+    void 정상_입력_데이터_읽기() {
         //given
         String input = "pobi,woni,jun\n5\n";
-        mockReadLine(input);
+        mockInput(input);
         ByteArrayOutputStream output = mockOutput();
 
         //when
         InputData inputData = inputView.readInputData();
+        String outputMessage = output.toString();
 
         //then
         assertAll(
+                () -> assertThat(outputMessage).contains(GameGuide.INPUT_CAR_NAMES.getMessage()),
                 () -> assertThat(inputData.carsData()).isEqualTo("pobi,woni,jun"),
-                () -> assertThat(inputData.roundData()).isEqualTo("5"),
-                () -> assertThat(output.toString()).contains(GameGuide.INPUT_CAR_NAMES.getMessage()),
-                () -> assertThat(output.toString()).contains(GameGuide.INPUT_ROUND.getMessage())
+                () -> assertThat(outputMessage).contains(GameGuide.INPUT_ROUND.getMessage()),
+                () -> assertThat(inputData.roundData()).isEqualTo("5")
         );
     }
 
-    private void mockReadLine(String input) {
+    private void mockInput(String input) {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
     }
 
