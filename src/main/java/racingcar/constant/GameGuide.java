@@ -8,7 +8,7 @@ public enum GameGuide {
     ROUND_HISTORY_HEAD("실행 결과"),
     ROUND_HISTORY_NEXT_TO_CAR_NAME(" : "),
     ROUND_HISTORY_NEW_LINE("\n"),
-    FINAL_WINNERS("최중 우승자 : ");
+    FINAL_WINNERS("최종 우승자 : ");
 
     private final String message;
 
