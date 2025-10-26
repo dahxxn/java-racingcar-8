@@ -32,22 +32,22 @@ public class OutputViewTest {
     }
 
     @Test
-    @DisplayName("경주 결과 출력 테스트")
-    void 경주_결과_출력_테스트() {
+    @DisplayName("경주 결과 출력 테스트: 라운드 기록과 우승자를 정상 출력")
+    void 경주_결과_출력_정상() {
         //given
-        String roundSnapShot = "pobi : --\nwoni : ---\njun : -";
+        String roundSnapshot = "pobi : --\nwoni : ---\njun : -";
         String finalWinners = "woni";
-        RaceData raceData = new RaceData(roundSnapShot, finalWinners);
+        RaceData raceData = new RaceData(roundSnapshot, finalWinners);
         ByteArrayOutputStream output = mockOutput();
 
         //when
         outputView.showRaceData(raceData);
+        String result = output.toString();
 
         //then
-        String result = output.toString();
         assertAll(
                 () -> assertThat(result).contains(GameGuide.ROUND_HISTORY_HEAD.getMessage()),
-                () -> assertThat(result).contains(roundSnapShot),
+                () -> assertThat(result).contains(roundSnapshot),
                 () -> assertThat(result).contains(GameGuide.FINAL_WINNERS.getMessage()),
                 () -> assertThat(result).contains(finalWinners)
         );

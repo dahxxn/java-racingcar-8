@@ -7,17 +7,18 @@ import racingcar.record.RaceData;
 
 public class OutputView {
     public void showRaceData(RaceData raceData) {
-        showRoundData(raceData.roundSnapShot());
+        showRoundData(raceData.roundSnapshot());
         showFinalWinners(raceData.finalWinners());
     }
 
-    private void showRoundData(String roundSnapShot) {
+    private void showRoundData(String roundSnapshot) {
+        System.out.println();
         System.out.println(ROUND_HISTORY_HEAD.getMessage());
-        System.out.println(roundSnapShot);
+        System.out.println(roundSnapshot);
     }
 
     private void showFinalWinners(String finalWinners) {
-        System.out.printf(FINAL_WINNERS.getMessage());
+        System.out.print(FINAL_WINNERS.getMessage());
         System.out.println(finalWinners);
     }
 }
