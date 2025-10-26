@@ -1,6 +1,6 @@
 package racingcar.util;
 
-import static racingcar.constant.GameGuide.INPUT_DELIMITER_MARK;
+import static racingcar.constant.GameMessage.INPUT_DELIMITER;
 import static racingcar.error.ErrorMessage.ROUND_FORMAT_ERROR_NOT_NUMBER;
 
 import java.util.Arrays;
@@ -24,7 +24,7 @@ public class Parser {
     }
 
     private static List<String> splitAndTrim(String carsData) {
-        return Arrays.stream(carsData.split(INPUT_DELIMITER_MARK.getMessage()))
+        return Arrays.stream(carsData.split(INPUT_DELIMITER.getMessage()))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }

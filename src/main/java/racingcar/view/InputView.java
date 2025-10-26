@@ -1,7 +1,7 @@
 package racingcar.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import racingcar.constant.GameGuide;
+import racingcar.constant.GameMessage;
 import racingcar.record.InputData;
 
 public class InputView {
@@ -13,11 +13,11 @@ public class InputView {
     }
 
     private String readCarsData() {
-        return readRawData(GameGuide.INPUT_CAR_NAMES.getMessage());
+        return readRawData(GameMessage.INPUT_CAR_NAMES.getMessage());
     }
 
     private String readRoundData() {
-        return readRawData(GameGuide.INPUT_ROUND.getMessage());
+        return readRawData(GameMessage.INPUT_ROUND.getMessage());
     }
 
     private String readRawData(String inputMessage) {

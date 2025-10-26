@@ -1,7 +1,7 @@
 package racingcar.view;
 
-import static racingcar.constant.GameGuide.FINAL_WINNERS;
-import static racingcar.constant.GameGuide.ROUND_HISTORY_HEAD;
+import static racingcar.constant.GameMessage.FINAL_WINNERS;
+import static racingcar.constant.GameMessage.ROUND_RESULT;
 
 import racingcar.record.RaceData;
 
@@ -13,7 +13,7 @@ public class OutputView {
 
     private void showRoundData(String roundSnapshot) {
         System.out.println();
-        System.out.println(ROUND_HISTORY_HEAD.getMessage());
+        System.out.println(ROUND_RESULT.getMessage());
         System.out.println(roundSnapshot);
     }
 

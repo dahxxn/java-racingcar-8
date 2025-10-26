@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.constant.GameGuide;
+import racingcar.constant.GameMessage;
 import racingcar.record.InputData;
 
 public class InputViewTest {
@@ -48,9 +48,9 @@ public class InputViewTest {
 
         //then
         assertAll(
-                () -> assertThat(outputMessage).contains(GameGuide.INPUT_CAR_NAMES.getMessage()),
+                () -> assertThat(outputMessage).contains(GameMessage.INPUT_CAR_NAMES.getMessage()),
                 () -> assertThat(inputData.carsData()).isEqualTo("pobi,woni,jun"),
-                () -> assertThat(outputMessage).contains(GameGuide.INPUT_ROUND.getMessage()),
+                () -> assertThat(outputMessage).contains(GameMessage.INPUT_ROUND.getMessage()),
                 () -> assertThat(inputData.roundData()).isEqualTo("5")
         );
     }

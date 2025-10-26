@@ -1,7 +1,7 @@
 package racingcar.service;
 
-import static racingcar.constant.GameGuide.ROUND_HISTORY_NEW_LINE;
-import static racingcar.constant.GameGuide.ROUND_HISTORY_NEXT_TO_CAR_NAME;
+import static racingcar.constant.GameMessage.CAR_NAME_SEPARATOR;
+import static racingcar.constant.GameMessage.NEW_LINE;
 
 import java.util.List;
 import racingcar.model.Car;
@@ -40,13 +40,13 @@ public class GamePlayService {
             car.tryMove(forwardPolicy);
             recordCarDistance(roundSnapshot, car);
         }
-        roundSnapshot.append(ROUND_HISTORY_NEW_LINE.getMessage());
+        roundSnapshot.append(NEW_LINE.getMessage());
     }
 
     private void recordCarDistance(StringBuilder roundSnapshot, Car car) {
         roundSnapshot.append(car.getName());
-        roundSnapshot.append(ROUND_HISTORY_NEXT_TO_CAR_NAME.getMessage());
+        roundSnapshot.append(CAR_NAME_SEPARATOR.getMessage());
         roundSnapshot.append(car.getDistanceDisplay());
-        roundSnapshot.append(ROUND_HISTORY_NEW_LINE.getMessage());
+        roundSnapshot.append(NEW_LINE.getMessage());
     }
 }

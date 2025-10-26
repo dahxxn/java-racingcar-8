@@ -10,7 +10,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import racingcar.constant.GameGuide;
+import racingcar.constant.GameMessage;
 import racingcar.record.RaceData;
 
 public class OutputViewTest {
@@ -46,9 +46,9 @@ public class OutputViewTest {
 
         //then
         assertAll(
-                () -> assertThat(result).contains(GameGuide.ROUND_HISTORY_HEAD.getMessage()),
+                () -> assertThat(result).contains(GameMessage.ROUND_RESULT.getMessage()),
                 () -> assertThat(result).contains(roundSnapshot),
-                () -> assertThat(result).contains(GameGuide.FINAL_WINNERS.getMessage()),
+                () -> assertThat(result).contains(GameMessage.FINAL_WINNERS.getMessage()),
                 () -> assertThat(result).contains(finalWinners)
         );
     }

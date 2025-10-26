@@ -1,6 +1,6 @@
 package racingcar.model;
 
-import static racingcar.constant.GameGuide.DISTANCE_MARK;
+import static racingcar.constant.GameMessage.DISTANCE_MARK;
 
 import racingcar.policy.ForwardPolicy;
 
