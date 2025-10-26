@@ -17,7 +17,7 @@ public class Winners {
         StringBuilder finalWinners = new StringBuilder();
 
         for (Car car : cars) {
-            if (car.getDistanceValue() == maxDistance) {
+            if (car.getDistance() == maxDistance) {
                 finalWinners.append(car.getName());
                 finalWinners.append(DELIMITER_MARK.getMessage());
             }
@@ -31,6 +31,6 @@ public class Winners {
     }
 
     private static int findMaxDistance(List<Car> cars) {
-        return cars.stream().mapToInt(Car::getDistanceValue).max().orElse(DEFAULT_DISTANCE);
+        return cars.stream().mapToInt(Car::getDistance).max().orElse(DEFAULT_DISTANCE);
     }
 }

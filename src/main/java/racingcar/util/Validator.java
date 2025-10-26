@@ -17,7 +17,7 @@ public final class Validator {
     private static final int MIN_ROUND_COUNT = 1;
 
     public static void validateCarCount(List<Car> cars) {
-        if (cars == null || cars.size() < MIN_CAR_COUNT) {
+        if (cars.size() < MIN_CAR_COUNT) {
             throw new IllegalArgumentException(CAR_COUNT_ERROR.getMessage());
         }
     }
@@ -32,7 +32,7 @@ public final class Validator {
         }
     }
 
-    public static void validateCarNameDuplicate(List<Car> cars) {
+    public static void validateNoDuplicateCarNames(List<Car> cars) {
         Set<String> carNames = new HashSet<>();
         for (Car car : cars) {
             if (!carNames.add(car.getName())) {
@@ -46,6 +46,4 @@ public final class Validator {
             throw new IllegalArgumentException(ROUND_COUNT_ERROR.getMessage());
         }
     }
-
-
 }

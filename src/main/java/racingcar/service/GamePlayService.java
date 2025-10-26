@@ -41,9 +41,7 @@ public class GamePlayService {
     private void recordCarDistance(StringBuilder roundSnapShot, Car car) {
         roundSnapShot.append(car.getName());
         roundSnapShot.append(ROUND_HISTORY_NEXT_TO_CAR_NAME.getMessage());
-        roundSnapShot.append(car.getDistance());
+        roundSnapShot.append(car.getDistanceDisplay());
         roundSnapShot.append(ROUND_HISTORY_NEW_LINE.getMessage());
     }
-
-
 }

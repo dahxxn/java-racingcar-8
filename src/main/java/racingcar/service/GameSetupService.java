@@ -9,22 +9,9 @@ import racingcar.util.Validator;
 
 public class GameSetupService {
     public SetupData prepare(InputData inputData) {
-        SetupData parseData = parseInputData(inputData);
-        validateAll(parseData);
-        return parseData;
-    }
-
-    private void validateAll(SetupData data) {
-        validateCars(data.cars());
-        Validator.validateRoundCount(data.rounds());
-    }
-
-    private void validateCars(List<Car> cars) {
-        Validator.validateCarCount(cars);
-        for (Car c : cars) {
-            Validator.validateCarName(c.getName());
-        }
-        Validator.validateCarNameDuplicate(cars);
+        SetupData setupData = parseInputData(inputData);
+        validateSetupData(setupData);
+        return setupData;
     }
 
     private SetupData parseInputData(InputData inputData) {
@@ -33,4 +20,16 @@ public class GameSetupService {
         return new SetupData(cars, rounds);
     }
 
+    private void validateSetupData(SetupData setupData) {
+        validateCars(setupData.cars());
+        Validator.validateRoundCount(setupData.rounds());
+    }
+
+    private void validateCars(List<Car> cars) {
+        Validator.validateCarCount(cars);
+        for (Car car : cars) {
+            Validator.validateCarName(car.getName());
+        }
+        Validator.validateNoDuplicateCarNames(cars);
+    }
 }

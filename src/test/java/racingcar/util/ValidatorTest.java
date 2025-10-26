@@ -113,7 +113,7 @@ public class ValidatorTest {
         );
 
         // when & then
-        assertThatCode(() -> Validator.validateCarNameDuplicate(cars))
+        assertThatCode(() -> Validator.validateNoDuplicateCarNames(cars))
                 .doesNotThrowAnyException();
     }
 
@@ -128,7 +128,7 @@ public class ValidatorTest {
         );
 
         // when & then
-        assertThatThrownBy(() -> Validator.validateCarNameDuplicate(cars))
+        assertThatThrownBy(() -> Validator.validateNoDuplicateCarNames(cars))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_NAME_ERROR_DUPLICATE.getMessage());
     }
@@ -143,7 +143,7 @@ public class ValidatorTest {
         );
 
         // when & then
-        assertThatCode(() -> Validator.validateCarNameDuplicate(cars))
+        assertThatCode(() -> Validator.validateNoDuplicateCarNames(cars))
                 .doesNotThrowAnyException();
     }
 

@@ -23,11 +23,11 @@ public class Car {
         }
     }
 
-    public String getDistance() {
+    public String getDistanceDisplay() {
         return DISTANCE_MARK.getMessage().repeat(distance);
     }
 
-    public int getDistanceValue() {
+    public int getDistance() {
         return distance;
     }
 }
