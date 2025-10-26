@@ -4,7 +4,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,19 +14,16 @@ import racingcar.record.RaceData;
 
 public class OutputViewTest {
     private OutputView outputView;
-    private InputStream inputStream;
     private PrintStream printStream;
 
     @BeforeEach
     void setUp() {
         outputView = new OutputView();
-        inputStream = System.in;
         printStream = System.out;
     }
 
     @AfterEach
     void cleanUp() {
-        System.setIn(inputStream);
         System.setOut(printStream);
     }
 
