@@ -11,7 +11,8 @@ public class Application {
     public static void main(String[] args) {
         InputView inputView = new InputView();
         GameSetupService gameSetupService = new GameSetupService();
-        GamePlayService gamePlayService = new GamePlayService(new ForwardPolicy());
+        ForwardPolicy forwardPolicy = new ForwardPolicy();
+        GamePlayService gamePlayService = new GamePlayService(forwardPolicy);
         OutputView outputView = new OutputView();
 
         RacingCarController racingCarController = new RacingCarController(inputView, gameSetupService, gamePlayService,

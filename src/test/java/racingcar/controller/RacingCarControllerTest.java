@@ -25,6 +25,9 @@ import racingcar.view.InputView;
 import racingcar.view.OutputView;
 
 class RacingCarControllerTest {
+    private static final int MOVING_FORWARD = 4;
+    private static final int STOP = 3;
+
     private RacingCarController racingCarController;
     private InputStream inputStream;
     private PrintStream printStream;
@@ -61,12 +64,12 @@ class RacingCarControllerTest {
 
                     //when
                     racingCarController.run();
+                    String result = output.toString();
 
                     //then
-                    String result = output.toString();
                     assertThat(result).contains("pobi : -", "woni : ", "최종 우승자 : pobi");
                 },
-                4, 3
+                MOVING_FORWARD, STOP
         );
     }
 
@@ -82,12 +85,14 @@ class RacingCarControllerTest {
 
                     //when
                     racingCarController.run();
+                    String result = output.toString();
 
                     //then
-                    String result = output.toString();
                     assertThat(result).contains("pobi :", "woni :", "jun :", "최종 우승자");
                 },
-                4, 4, 3, 4, 3, 3, 4, 4, 3
+                MOVING_FORWARD, MOVING_FORWARD, STOP,
+                MOVING_FORWARD, STOP, STOP,
+                MOVING_FORWARD, MOVING_FORWARD, STOP
         );
     }
 
