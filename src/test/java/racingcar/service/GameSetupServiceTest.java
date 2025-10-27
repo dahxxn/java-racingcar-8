@@ -6,6 +6,7 @@ import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_WHITESPACE;
 import static racingcar.error.ErrorMessage.ROUND_COUNT_ERROR;
 import static racingcar.error.ErrorMessage.ROUND_FORMAT_ERROR_NOT_NUMBER;
 
@@ -92,6 +93,18 @@ class GameSetupServiceTest {
         assertThatThrownBy(() -> gameSetupService.prepare(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_NAME_ERROR_DUPLICATE.getMessage());
+    }
+
+    @Test
+    @DisplayName("게임 준비 예외 테스트: 이름에 공백이 있을 때 예외 발생")
+    void 게임_준비_예외_이름_속_공백() {
+        //given
+        InputData input = new InputData("po bi,woni", "3");
+
+        //when & then
+        assertThatThrownBy(() -> gameSetupService.prepare(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CAR_NAME_ERROR_WHITESPACE.getMessage());
     }
 
     @Test

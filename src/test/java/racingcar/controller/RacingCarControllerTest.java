@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_WHITESPACE;
 import static racingcar.error.ErrorMessage.ROUND_COUNT_ERROR;
 import static racingcar.error.ErrorMessage.ROUND_FORMAT_ERROR_NOT_NUMBER;
 
@@ -138,6 +139,21 @@ class RacingCarControllerTest {
         assertThatThrownBy(() -> racingCarController.run())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(CAR_NAME_ERROR_DUPLICATE.getMessage())
+        ;
+    }
+
+    @Test
+    @DisplayName("잘못된 자동차 이름으로 예외 발생 테스트: 자동차 이름 속 공백으로 예외 발생")
+    void 잘못된_자동차_이름_예외_테스트_이름_속_공백() {
+        //given
+        String input = "po bi,woni,pobi\n1\n";
+        mockInput(input);
+        mockOutput();
+
+        //when & then
+        assertThatThrownBy(() -> racingCarController.run())
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CAR_NAME_ERROR_WHITESPACE.getMessage())
         ;
     }
 

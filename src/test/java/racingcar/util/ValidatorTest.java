@@ -6,6 +6,7 @@ import static racingcar.error.ErrorMessage.CAR_COUNT_ERROR;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_DUPLICATE;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_EMPTY;
 import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_LONG;
+import static racingcar.error.ErrorMessage.CAR_NAME_ERROR_WHITESPACE;
 import static racingcar.error.ErrorMessage.ROUND_COUNT_ERROR;
 
 import java.util.ArrayList;
@@ -134,6 +135,18 @@ public class ValidatorTest {
         //when & then
         assertThatCode(() -> Validator.validateNoDuplicateCarNames(cars))
                 .doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("자동차 이름 검증 예외 테스트: 이름에 공백이 있을 때 예외 발생")
+    void 자동차_이름_중복_검증_예외_이름_속_공백() {
+        //given
+        String carName = "p   b";
+
+        //when & then
+        assertThatThrownBy(() -> Validator.validateCarName(carName))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CAR_NAME_ERROR_WHITESPACE.getMessage());
     }
 
     @Test
