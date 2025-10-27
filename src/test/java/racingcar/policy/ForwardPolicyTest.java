@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ForwardPolicyTest {
-
     @Test
     @DisplayName("전진 가능 여부 테스트: 랜덤 값이 4 이상일 때 전진")
     void 전진_가능_4이상() {

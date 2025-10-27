@@ -16,7 +16,6 @@ import racingcar.record.InputData;
 import racingcar.record.SetupData;
 
 class GameSetupServiceTest {
-
     private final GameSetupService gameSetupService = new GameSetupService();
 
     @Test

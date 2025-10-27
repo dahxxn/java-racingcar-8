@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import racingcar.policy.ForwardPolicy;
 
 class CarTest {
-
     @Test
     @DisplayName("자동차 생성 테스트: 이름과 초기 거리 0으로 생성될 때 통과")
     void 자동차_생성_정상() {

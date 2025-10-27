@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import racingcar.model.Car;
 
 public class ParserTest {
-
     @Test
     @DisplayName("자동차 목록 파싱 테스트: 정상적으로 파싱될 때 통과")
     void 자동차_목록_파싱_정상() {

@@ -7,7 +7,6 @@ import camp.nextstep.edu.missionutils.Console;
 import racingcar.record.InputData;
 
 public class InputView {
-
     public InputData readInputData() {
         String carsData = readCarsData();
         String roundData = readRoundData();
@@ -26,6 +25,4 @@ public class InputView {
         System.out.println(inputMessage);
         return Console.readLine();
     }
-
-
 }

@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import racingcar.model.Car;
 
 public class ValidatorTest {
-
     @Test
     @DisplayName("자동차 수 검증 테스트: 2대 이상일 때 통과")
     void 자동차_수_검증_정상() {

@@ -11,7 +11,6 @@ import racingcar.record.RaceData;
 import racingcar.record.SetupData;
 
 class GamePlayServiceTest {
-
     @Test
     @DisplayName("게임 진행 테스트: 모든 자동차가 동일하게 이동할 때 공동 우승")
     void 게임_진행_공동_우승() {

@@ -9,7 +9,6 @@ import racingcar.model.Car;
 import racingcar.policy.ForwardPolicy;
 
 class WinnersTest {
-
     @Test
     @DisplayName("우승자 선정 테스트: 공동 우승일 때 쉼표로 연결하여 반환")
     void 우승자_선정_공동_우승() {
