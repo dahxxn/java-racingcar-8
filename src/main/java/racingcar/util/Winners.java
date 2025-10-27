@@ -1,6 +1,6 @@
 package racingcar.util;
 
-import static racingcar.constant.GameMessage.OUTPUT_DELIMITER;
+import static racingcar.constant.GameSymbol.OUTPUT_DELIMITER;
 
 import java.util.List;
 import racingcar.model.Car;
@@ -30,13 +30,13 @@ public class Winners {
 
     private static void appendWinnerName(StringBuilder winnerNames, String carName, boolean isFirst) {
         if (!isFirst) {
-            String delimiter = OUTPUT_DELIMITER.getMessage();
+            String delimiter = OUTPUT_DELIMITER.getValue();
             winnerNames.append(delimiter);
         }
 
         winnerNames.append(carName);
     }
-    
+
     private static int findMaxDistance(List<Car> cars) {
         int maxDistance = DEFAULT_DISTANCE;
         for (Car car : cars) {

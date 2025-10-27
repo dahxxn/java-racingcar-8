@@ -1,7 +1,6 @@
 package racingcar.service;
 
-import static racingcar.constant.GameMessage.CAR_NAME_SEPARATOR;
-import static racingcar.constant.GameMessage.NEW_LINE;
+import static racingcar.constant.GameSymbol.CAR_NAME_SEPARATOR;
 
 import java.util.List;
 import racingcar.model.Car;
@@ -37,13 +36,13 @@ public class GamePlayService {
             car.tryMove(forwardPolicy);
             recordCarDistance(roundSnapshot, car);
         }
-        roundSnapshot.append(NEW_LINE.getMessage());
+        roundSnapshot.append(System.lineSeparator());
     }
 
     private void recordCarDistance(StringBuilder roundSnapshot, Car car) {
         roundSnapshot.append(car.getName());
-        roundSnapshot.append(CAR_NAME_SEPARATOR.getMessage());
+        roundSnapshot.append(CAR_NAME_SEPARATOR.getValue());
         roundSnapshot.append(car.getDistanceDisplay());
-        roundSnapshot.append(NEW_LINE.getMessage());
+        roundSnapshot.append(System.lineSeparator());
     }
 }

@@ -1,6 +1,6 @@
 package racingcar.util;
 
-import static racingcar.constant.GameMessage.INPUT_DELIMITER;
+import static racingcar.constant.GameSymbol.INPUT_DELIMITER;
 import static racingcar.error.ErrorMessage.ROUND_FORMAT_ERROR_NOT_NUMBER;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Parser {
     }
 
     private static List<String> splitAndTrim(String carsData) {
-        String delimiter = INPUT_DELIMITER.getMessage();
+        String delimiter = INPUT_DELIMITER.getValue();
 
         List<String> carNames = new ArrayList<>();
         for (String part : carsData.split(delimiter)) {

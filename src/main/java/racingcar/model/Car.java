@@ -1,6 +1,6 @@
 package racingcar.model;
 
-import static racingcar.constant.GameMessage.DISTANCE_MARK;
+import static racingcar.constant.GameSymbol.DISTANCE_MARK;
 
 import racingcar.policy.ForwardPolicy;
 
@@ -24,7 +24,7 @@ public class Car {
     }
 
     public String getDistanceDisplay() {
-        String distanceMark = DISTANCE_MARK.getMessage();
+        String distanceMark = DISTANCE_MARK.getValue();
         return distanceMark.repeat(distance);
     }
 
