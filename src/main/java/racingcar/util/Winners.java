@@ -5,8 +5,11 @@ import static racingcar.constant.GameSymbol.OUTPUT_DELIMITER;
 import java.util.List;
 import racingcar.model.Car;
 
-public class Winners {
+public final class Winners {
     private static final int DEFAULT_DISTANCE = 0;
+
+    private Winners() {
+    }
 
     public static String pickWinners(List<Car> cars) {
         int maxDistance = findMaxDistance(cars);
