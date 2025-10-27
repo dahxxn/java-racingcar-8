@@ -18,6 +18,9 @@ public final class Validator {
     private static final int MIN_ROUND_COUNT = 1;
     private static final String WHITE_SPACE = " ";
 
+    private Validator() {
+    }
+
     public static void validateCarCount(List<Car> cars) {
         if (cars.size() < MIN_CAR_COUNT) {
             throw new IllegalArgumentException(CAR_COUNT_ERROR.getMessage());

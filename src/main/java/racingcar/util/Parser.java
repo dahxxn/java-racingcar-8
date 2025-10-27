@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import racingcar.model.Car;
 
-public class Parser {
+public final class Parser {
+    private Parser() {
+    }
+
     public static List<Car> getCarList(String carsData) {
         List<String> carNames = splitAndTrim(carsData);
 
